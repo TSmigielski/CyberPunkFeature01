@@ -49,6 +49,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Hack Mode"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3101b89-57d2-4a8a-8900-6cdbbafc9b72"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Look Around"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e7b7d12-b0e5-4f41-96c1-4112b0d212d6"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KB & M"",
+                    ""action"": ""Hack Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -168,6 +187,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_LookAround = m_Player.FindAction("Look Around", throwIfNotFound: true);
+        m_Player_HackMode = m_Player.FindAction("Hack Mode", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -221,6 +241,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_LookAround;
+    private readonly InputAction m_Player_HackMode;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -229,6 +250,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @LookAround => m_Wrapper.m_Player_LookAround;
+        public InputAction @HackMode => m_Wrapper.m_Player_HackMode;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -250,6 +272,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @LookAround.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAround;
                 @LookAround.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAround;
                 @LookAround.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAround;
+                @HackMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHackMode;
+                @HackMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHackMode;
+                @HackMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHackMode;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -266,6 +291,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @LookAround.started += instance.OnLookAround;
                 @LookAround.performed += instance.OnLookAround;
                 @LookAround.canceled += instance.OnLookAround;
+                @HackMode.started += instance.OnHackMode;
+                @HackMode.performed += instance.OnHackMode;
+                @HackMode.canceled += instance.OnHackMode;
             }
         }
     }
@@ -285,5 +313,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLookAround(InputAction.CallbackContext context);
+        void OnHackMode(InputAction.CallbackContext context);
     }
 }
