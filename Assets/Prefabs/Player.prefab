@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 2463087388193091305}
   - component: {fileID: 2463087388193091319}
   - component: {fileID: 2463087388193091304}
+  - component: {fileID: 1989632422529002044}
   - component: {fileID: 2463087388193091318}
   - component: {fileID: 2463087388193091306}
   m_Layer: 0
@@ -270,13 +271,34 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2463087388193091317}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 83f9fa161917f85439dad6bf02ab5b4f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.33
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1989632422529002044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463087388193091317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aff49046a8db145801616c2732e5bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fppController: {fileID: 2463087388193091318}
+  _head: {fileID: 2463087387326718673}
+  _acceleration: 30
+  _sprintAcceleration: 45
+  _maxSpeed: 4
+  _maxSprintSpeed: 6
+  _inAirMultiplier: 0.4
+  _jumpForce: 10
+  _headRotationClamps: {x: 90, y: -80}
 --- !u!114 &2463087388193091318
 MonoBehaviour:
   m_ObjectHideFlags: 0
