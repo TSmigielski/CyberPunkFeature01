@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2463087387326718687}
   - component: {fileID: 2463087387326718674}
   - component: {fileID: 2463087387326718675}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Antialiasing: 2
   m_AntialiasingQuality: 2
   m_StopNaN: 0
-  m_Dithering: 0
+  m_Dithering: 1
   m_ClearDepth: 1
   m_AllowXRRendering: 1
   m_RequiresDepthTexture: 0
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 2463087387455561969}
   - component: {fileID: 2463087387455561972}
   - component: {fileID: 2463087387455561971}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,9 +225,9 @@ GameObject:
   - component: {fileID: 1989632422529002044}
   - component: {fileID: 2463087388193091318}
   - component: {fileID: 2463087388193091306}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,6 +245,7 @@ Transform:
   m_Children:
   - {fileID: 2463087387455561969}
   - {fileID: 2463087387326718673}
+  - {fileID: 2343988532933317129}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -103.11, z: 0}
@@ -291,7 +292,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fppController: {fileID: 2463087388193091318}
-  _head: {fileID: 2463087387326718673}
+  myCamera: {fileID: 2463087387326718672}
+  hackModePostProcessing: {fileID: 4271664953203076789}
   _acceleration: 30
   _sprintAcceleration: 45
   _maxSpeed: 4
@@ -311,16 +313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b735c18683fc8ea46bef22f6a213440e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 2463087387326718673}
-  playerAcceleration: 30
-  playerSprintAcceleration: 45
-  maxSpeed: 4
-  maxSprintSpeed: 6
-  inAirMultiplier: 0.5
-  jumpForce: 10
-  headRotationClamps: {x: 90, y: -80}
-  isSprinting: 0
-  isGrounded: 1
 --- !u!114 &2463087388193091306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,3 +325,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a700dbcb6840ae04da82169c6b7c37df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4271664953203076789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2343988532933317129}
+  - component: {fileID: 3180145445930951768}
+  m_Layer: 0
+  m_Name: Hack Mode Post Processing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2343988532933317129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4271664953203076789}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2463087388193091305}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3180145445930951768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4271664953203076789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 9242ec8af02e2834eab2dabc641392fc, type: 2}

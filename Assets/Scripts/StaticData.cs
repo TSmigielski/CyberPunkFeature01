@@ -12,10 +12,15 @@ public class StaticData : MonoBehaviour
 			Destroy(gameObject);
 	}
 
-	[SerializeField] private LayerMask layerMask;
+	[SerializeField] private LayerMask _groundLayer;
+	[SerializeField] private LayerMask _enemyLayer;
+
 	public LayerMask GroundLayer
 	{
-		get { return layerMask; }
+		get { return _groundLayer; }
 	}
-
+	public LayerMask EnemyLayer
+	{
+		get { return _enemyLayer; }
+	}
 }

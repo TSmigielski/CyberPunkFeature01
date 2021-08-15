@@ -23,8 +23,8 @@ public class FPPController : MonoBehaviour
 
 	private void HandleLooking()
 	{
-		mouseX = controls.LookVector.x; //Pass player look input multiplied by sensitivity to a private value
-		mouseY = controls.LookVector.y; //Pass player look input multiplied by sensitivity to a private value
+		mouseX = controls.LookVector.x /** Time.deltaTime*/; //Pass player look input to a private value
+		mouseY = controls.LookVector.y /** Time.deltaTime*/; //Pass player look input to a private value
 
 		headRotation -= mouseY;
 		headRotation = Mathf.Clamp(headRotation, controls.HeadRotationClamps.y, controls.HeadRotationClamps.x);
