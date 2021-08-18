@@ -13,10 +13,16 @@ public class PlayerSettings : MonoBehaviour
 	}
 
 	[SerializeField] private float _mouseSensitivity;
+	[SerializeField] private float _gamepadSensitivity;
 
 	public float MouseSensitivity
 	{
 		get { return _mouseSensitivity; }
-		set { _mouseSensitivity = value; }
+		private set { _mouseSensitivity = value; }
+	}
+	public float GamepadSensitivity
+	{
+		get { return _gamepadSensitivity; }
+		private set { _gamepadSensitivity = value; }
 	}
 }

@@ -30,9 +30,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Look Around",
+                    "name": "LookWithMouse",
                     "type": "Value",
                     "id": "a40d2d93-117a-4e80-9917-5e1b965f7ab9",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "LookWithGamepad",
+                    "type": "Value",
+                    "id": "f3b1def4-20f3-429b-9b17-ef5b6baea67b",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
@@ -104,11 +112,33 @@
                 },
                 {
                     "name": "",
+                    "id": "7bf6a614-3dbd-4268-96a2-6485c48f94e4",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "58f9209e-bb19-4eb1-aafa-b7f1a1ba33a8",
                     "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "KB & M",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9f2eeac-4ae8-40e3-a680-c447952a2f07",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -126,12 +156,23 @@
                 },
                 {
                     "name": "",
+                    "id": "c75bcd9f-51cc-4e66-adb4-6f0c60f76f3d",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3f62ce68-d26b-4856-852b-226fb1a35394",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "KB & M",
-                    "action": "Look Around",
+                    "action": "LookWithMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -143,6 +184,28 @@
                     "processors": "",
                     "groups": "KB & M",
                     "action": "Hack Mode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86aea8f2-5267-4e3e-b28e-4f0b7d131bb3",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Hack Mode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6717bd34-06e5-454c-97f5-e567475a9743",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "LookWithGamepad",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -161,6 +224,17 @@
                 },
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

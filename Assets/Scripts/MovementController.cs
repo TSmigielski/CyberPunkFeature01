@@ -20,7 +20,6 @@ public class MovementController : MonoBehaviour
 	{
 		HandleMoving();
 		HandleGravity();
-		Debug.Log(brainz.CController.isGrounded);
 	}
 
 	private void HandleMoving()

@@ -43,9 +43,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Look Around"",
+                    ""name"": ""LookWithMouse"",
                     ""type"": ""Value"",
                     ""id"": ""a40d2d93-117a-4e80-9917-5e1b965f7ab9"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LookWithGamepad"",
+                    ""type"": ""Value"",
+                    ""id"": ""f3b1def4-20f3-429b-9b17-ef5b6baea67b"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -117,11 +125,33 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""7bf6a614-3dbd-4268-96a2-6485c48f94e4"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""58f9209e-bb19-4eb1-aafa-b7f1a1ba33a8"",
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KB & M"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9f2eeac-4ae8-40e3-a680-c447952a2f07"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -139,12 +169,23 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c75bcd9f-51cc-4e66-adb4-6f0c60f76f3d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""3f62ce68-d26b-4856-852b-226fb1a35394"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KB & M"",
-                    ""action"": ""Look Around"",
+                    ""action"": ""LookWithMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -156,6 +197,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""KB & M"",
                     ""action"": ""Hack Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86aea8f2-5267-4e3e-b28e-4f0b7d131bb3"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Hack Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6717bd34-06e5-454c-97f5-e567475a9743"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LookWithGamepad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -178,6 +241,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -186,7 +260,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_LookAround = m_Player.FindAction("Look Around", throwIfNotFound: true);
+        m_Player_LookWithMouse = m_Player.FindAction("LookWithMouse", throwIfNotFound: true);
+        m_Player_LookWithGamepad = m_Player.FindAction("LookWithGamepad", throwIfNotFound: true);
         m_Player_HackMode = m_Player.FindAction("Hack Mode", throwIfNotFound: true);
     }
 
@@ -240,7 +315,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_LookAround;
+    private readonly InputAction m_Player_LookWithMouse;
+    private readonly InputAction m_Player_LookWithGamepad;
     private readonly InputAction m_Player_HackMode;
     public struct PlayerActions
     {
@@ -249,7 +325,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @LookAround => m_Wrapper.m_Player_LookAround;
+        public InputAction @LookWithMouse => m_Wrapper.m_Player_LookWithMouse;
+        public InputAction @LookWithGamepad => m_Wrapper.m_Player_LookWithGamepad;
         public InputAction @HackMode => m_Wrapper.m_Player_HackMode;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -269,9 +346,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @LookAround.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAround;
-                @LookAround.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAround;
-                @LookAround.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookAround;
+                @LookWithMouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookWithMouse;
+                @LookWithMouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookWithMouse;
+                @LookWithMouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookWithMouse;
+                @LookWithGamepad.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookWithGamepad;
+                @LookWithGamepad.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookWithGamepad;
+                @LookWithGamepad.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLookWithGamepad;
                 @HackMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHackMode;
                 @HackMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHackMode;
                 @HackMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHackMode;
@@ -288,9 +368,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @LookAround.started += instance.OnLookAround;
-                @LookAround.performed += instance.OnLookAround;
-                @LookAround.canceled += instance.OnLookAround;
+                @LookWithMouse.started += instance.OnLookWithMouse;
+                @LookWithMouse.performed += instance.OnLookWithMouse;
+                @LookWithMouse.canceled += instance.OnLookWithMouse;
+                @LookWithGamepad.started += instance.OnLookWithGamepad;
+                @LookWithGamepad.performed += instance.OnLookWithGamepad;
+                @LookWithGamepad.canceled += instance.OnLookWithGamepad;
                 @HackMode.started += instance.OnHackMode;
                 @HackMode.performed += instance.OnHackMode;
                 @HackMode.canceled += instance.OnHackMode;
@@ -307,12 +390,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_KBMSchemeIndex];
         }
     }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnLookAround(InputAction.CallbackContext context);
+        void OnLookWithMouse(InputAction.CallbackContext context);
+        void OnLookWithGamepad(InputAction.CallbackContext context);
         void OnHackMode(InputAction.CallbackContext context);
     }
 }

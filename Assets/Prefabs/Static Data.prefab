@@ -63,3 +63,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mouseSensitivity: 0.02
+  _gamepadSensitivity: 200
