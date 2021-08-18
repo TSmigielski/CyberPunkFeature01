@@ -2,46 +2,44 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 [SelectionBase]
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour, IEntity
 {
 	//Interface
-	public Rigidbody RB { get; private set; }
-	public Collider CL { get; private set; }
+	public CharacterController CController { get; private set; }
 	public Transform Head { get; private set; }
-	public Movement ControlScheme { get; private set; }
+	public MovementInformation ControlScheme { get; private set; }
 
 	//Player Controls
 	PlayerControls controls;
 
-	//Other Variables
+	//Look Around variables
+	Vector2 lookVector;
+	float headRotation, mouseX, mouseY;
+
+	//Other Variables/Properties
 	public bool HackModeEnabled { get; private set; } = false;
 
 	[Header("Objects/Components")]
-	[SerializeField] FPPController fppController;
 	[SerializeField] Camera myCamera;
 	UniversalAdditionalCameraData myCamData;
+	[SerializeField] MovementController movementController;
 	[SerializeField] GameObject hackModePostProcessing;
 
 	[Header("Player Values")]
-	[SerializeField] float _acceleration;
-	[SerializeField] float _sprintAcceleration;
-	[SerializeField] float _maxSpeed;
-	[SerializeField] float _maxSprintSpeed;
-	[SerializeField] float _inAirMultiplier;
-	[SerializeField] float _jumpForce;
-	[SerializeField] Vector2 _headRotationClamps;
+	[SerializeField] public float _speed;
+	[SerializeField] float _sprintSpeed;
+	[SerializeField] float _jumpHeight;
+	[SerializeField] Vector2 _headRotationLimit;
 
 	private void Awake()
 	{
-		RB = GetComponent<Rigidbody>();  //Reference Rigidbody to the property
-		CL = GetComponent<Collider>();   //Reference Collider to the property
-		Head = myCamera.transform;		 //Reference Camera transform to the property
-		ControlScheme = new Movement();  //Instantiate the Movement class
-		controls = new PlayerControls(); //Instantiate the controls
+		CController = GetComponent<CharacterController>(); //Reference Character Controller to the field
+		Head = myCamera.transform;						   //Reference Camera transform to the property
+		ControlScheme = new MovementInformation();		   //Instantiate the Movement class
+		controls = new PlayerControls();				   //Instantiate the controls
 		myCamData = myCamera.GetComponent<UniversalAdditionalCameraData>(); //Reference extra cam data to the field
-		InitializeControlScheme();		 //Assign default values to the control scheme
+		InitializeControlScheme();						   //Assign default values to the control scheme
 	}
 
 	private void Start()
@@ -51,65 +49,69 @@ public class PlayerController : MonoBehaviour, IEntity
 
 	private void OnEnable()
 	{
-		controls.Enable();																//Enable the controls
+		controls.Enable();                                                              //Enable the controls
 		controls.Player.Sprint.started += _ => { ControlScheme.IsSprinting = true; };   //Subscribe to the sprint start event, and set the value
 		controls.Player.Sprint.canceled += _ => { ControlScheme.IsSprinting = false; }; //Subscribe to the sprint stop event, and set the value
-		controls.Player.Jump.performed += _ => fppController.PerformJump();             //Subscribe to the jump event and handle it
-		controls.Player.HackMode.performed += _ => HandleHackMode();					//Subscribe to the Hack Mode event and handle it
+		controls.Player.Jump.performed += _ => movementController.PerformJump();        //Subscribe to the jump event and handle it
+		controls.Player.HackMode.performed += _ => HandleHackMode();                    //Subscribe to the Hack Mode event and handle it
 	}
 
 	private void OnDisable()
 	{
 		controls.Player.Sprint.started -= _ => { ControlScheme.IsSprinting = true; };   //Unsubscribe from the sprint start event
 		controls.Player.Sprint.canceled -= _ => { ControlScheme.IsSprinting = false; }; //Unsubscribe from the sprint stop event
-		controls.Player.Jump.performed -= _ => fppController.PerformJump();             //Unubscribe from the jump event
+		controls.Player.Jump.performed -= _ => movementController.PerformJump();        //Unubscribe from the jump event
 		controls.Player.HackMode.performed -= _ => HandleHackMode();                    //Unubscribe from the Hack Mode event and handle it
-		controls.Disable();																//Disable the controls
+		controls.Disable();                                                             //Disable the controls
 	}
 
 	private void Update()
 	{
 		HandlePlayerInput();
-	}
-
-	private void OnCollisionEnter(Collision collision)
-	{
-		if (!collision.gameObject.layer.Equals(StaticData.Instance.GroundLayer)) //If player collides with a object on the ground layer
-			ControlScheme.IsGrounded = true;                                     //Set the grounded value to true
+		UpdateCharacterLooking();
 	}
 
 	private void InitializeControlScheme() //Assign default values to the control scheme
 	{
-		ControlScheme.Acceleration = _acceleration;
-		ControlScheme.SprintAcceleration = _sprintAcceleration;
-		ControlScheme.MaxSpeed = _maxSpeed;
-		ControlScheme.MaxSprintSpeed = _maxSprintSpeed;
-		ControlScheme.InAirMultiplier = _inAirMultiplier;
-		ControlScheme.JumpForce = _jumpForce;
-		ControlScheme.HeadRotationClamps = _headRotationClamps;
+		ControlScheme.Speed = _speed;
+		ControlScheme.SprintSpeed = _sprintSpeed;
+		ControlScheme.JumpHeight = _jumpHeight;
+		ControlScheme.HeadRotationClamps = _headRotationLimit;
 	}
 
 	private void HandlePlayerInput()
 	{
 		ControlScheme.MovementVector = controls.Player.Movement.ReadValue<Vector2>(); //Pass player move input to the control scheme
-		ControlScheme.LookVector = controls.Player.LookAround.ReadValue<Vector2>() * PlayerSettings.Instance.MouseSensitivity; //Pass player look input multiplied by sensitivity to the control scheme
+		lookVector = controls.Player.LookAround.ReadValue<Vector2>(); //Register player rotation/look input
+	}
+
+	private void UpdateCharacterLooking()
+	{
+		mouseX = lookVector.x * PlayerSettings.Instance.MouseSensitivity; //Multiply player input by sensitivity
+		mouseY = lookVector.y * PlayerSettings.Instance.MouseSensitivity; //Multiply player input by sensitivity
+
+		headRotation -= mouseY; //Invert the vertical rotation
+		headRotation = Mathf.Clamp(headRotation, ControlScheme.HeadRotationClamps.y, ControlScheme.HeadRotationClamps.x); //Clamp the vertical rotation
+
+		transform.Rotate(Vector3.up * mouseX); //Rotate the character horizontally
+		Head.localRotation = Quaternion.Euler(headRotation, 0f, 0f); //Rotate character's head vertically
 	}
 
 	private void HandleHackMode()
 	{
-		if (!HackModeEnabled)
+		if (!HackModeEnabled) //If hack mode is disabled
 		{
-			HackModeEnabled = true;
-			UI_Handler.Instance.HackModeOn();
-			myCamData.SetRenderer(1);
-			hackModePostProcessing.SetActive(true);
+			HackModeEnabled = true; //Make the field true
+			UI_Handler.Instance.HackModeOn(); //Change UI
+			myCamData.SetRenderer(1); //Enable the wallhack
+			hackModePostProcessing.SetActive(true); //Enable the on screen filter
 		}
 		else
 		{
-			HackModeEnabled = false;
-			UI_Handler.Instance.HackModeOff();
-			myCamData.SetRenderer(0);
-			hackModePostProcessing.SetActive(false);
+			HackModeEnabled = false; //Make the field false
+			UI_Handler.Instance.HackModeOff(); // Change UI
+			myCamData.SetRenderer(0); //Disable the wallhack
+			hackModePostProcessing.SetActive(false); //Disable the on screen filter
 		}
 	}
 }

@@ -2,8 +2,7 @@ using UnityEngine;
 
 public interface IEntity
 {
-	public Rigidbody RB { get; }
-	public Collider CL { get; }
+	public CharacterController CController { get; }
 	public Transform Head { get; }
-	public Movement ControlScheme { get; }
+	public MovementInformation ControlScheme { get; }
 }
