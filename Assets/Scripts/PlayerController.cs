@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour, IEntity
 {
 	//Interface
 	public CharacterController CController { get; private set; }
-	public Transform Head { get; private set; }
 	public MovementInformation ControlScheme { get; private set; }
 
 	//Player Controls
@@ -19,11 +18,16 @@ public class PlayerController : MonoBehaviour, IEntity
 	Vector2 lookVector;
 	float headRotation;
 
-	//Other Variables/Properties
+	//Hack Mode
 	public bool HackModeEnabled { get; private set; } = false;
 
+	//Equipment
+	Equipment[] myEquipment;
+	Equipment currentlyEquiped;
+
 	[Header("Objects/Components")]
-	[SerializeField] Camera myCamera;
+	[SerializeField] Transform head;
+	[SerializeField] Camera mainCamera;
 	UniversalAdditionalCameraData myCamData;
 	[SerializeField] MovementController movementController;
 	[SerializeField] GameObject hackModePostProcessing;
@@ -37,16 +41,19 @@ public class PlayerController : MonoBehaviour, IEntity
 	private void Awake()
 	{
 		CController = GetComponent<CharacterController>(); //Reference Character Controller to the field
-		Head = myCamera.transform;						   //Reference Camera transform to the property
 		ControlScheme = new MovementInformation();		   //Instantiate the Movement class
 		controls = new PlayerControls();				   //Instantiate the controls
-		myCamData = myCamera.GetComponent<UniversalAdditionalCameraData>(); //Reference extra cam data to the field
-		InitializeControlScheme();						   //Assign default values to the control scheme
+		myCamData = mainCamera.GetComponent<UniversalAdditionalCameraData>(); //Reference extra cam data to the field
+		InitializeControlScheme();                         //Assign default values to the control scheme
+		FindEquipment();								   //Find all pieces of equipment on the player
 	}
 
 	private void Start()
 	{
 		Cursor.lockState = CursorLockMode.Locked; //Lock the cursor and make it invisible
+
+		//todo Debug stuff
+		currentlyEquiped = myEquipment[0];
 	}
 
 	private void OnEnable()
@@ -56,16 +63,18 @@ public class PlayerController : MonoBehaviour, IEntity
 		controls.Player.Sprint.canceled += _ => { ControlScheme.IsSprinting = false; }; //Subscribe to the sprint stop event, and set the value
 		controls.Player.Jump.performed += _ => movementController.PerformJump();        //Subscribe to the jump event and handle it
 		controls.Player.HackMode.started += _ => HackModeOn();							//Subscribe to the Hack Mode on event
-		controls.Player.HackMode.canceled += _ => HackModeOff();						//Subscribe to the Hack Mode off event
+		controls.Player.HackMode.canceled += _ => HackModeOff();                        //Subscribe to the Hack Mode off event
+		controls.Player.Shoot.performed += _ => UseEquipedItem();						//Subscribe to the UseEquipedItem event and handle it
 	}
 
 	private void OnDisable()
 	{
 		controls.Player.Sprint.started -= _ => { ControlScheme.IsSprinting = true; };   //Unsubscribe from the sprint start event
 		controls.Player.Sprint.canceled -= _ => { ControlScheme.IsSprinting = false; }; //Unsubscribe from the sprint stop event
-		controls.Player.Jump.performed -= _ => movementController.PerformJump();        //Unubscribe from the jump event
-		controls.Player.HackMode.performed -= _ => HackModeOn();						//Unubscribe from the Hack Mode on event
-		controls.Player.HackMode.performed -= _ => HackModeOff();						//Unubscribe from the Hack Mode off event
+		controls.Player.Jump.performed -= _ => movementController.PerformJump();        //Unsubscribe from the jump event
+		controls.Player.HackMode.performed -= _ => HackModeOn();						//Unsubscribe from the Hack Mode on event
+		controls.Player.HackMode.performed -= _ => HackModeOff();                       //Unsubscribe from the Hack Mode off event
+		controls.Player.Shoot.performed -= _ => UseEquipedItem();                       //Unsubscribe from the UseEquipedItem event and handle it
 		controls.Disable();                                                             //Disable the controls
 	}
 
@@ -81,6 +90,11 @@ public class PlayerController : MonoBehaviour, IEntity
 		ControlScheme.SprintSpeed = _sprintSpeed;
 		ControlScheme.JumpHeight = _jumpHeight;
 		ControlScheme.HeadRotationClamps = _headRotationLimit;
+	}
+
+	private void FindEquipment()
+	{
+		myEquipment = GetComponentsInChildren<Equipment>();
 	}
 
 	private void HandlePlayerInput()
@@ -104,7 +118,7 @@ public class PlayerController : MonoBehaviour, IEntity
 		headRotation = Mathf.Clamp(headRotation, ControlScheme.HeadRotationClamps.y, ControlScheme.HeadRotationClamps.x); //Clamp the vertical rotation
 
 		transform.Rotate(Vector3.up * lookVector.x); //Rotate the character horizontally
-		Head.localRotation = Quaternion.Euler(headRotation, 0f, 0f); //Rotate character's head vertically
+		head.localRotation = Quaternion.Euler(headRotation, 0f, 0f); //Rotate character's head vertically
 	}
 
 	private void HackModeOn()
@@ -121,5 +135,10 @@ public class PlayerController : MonoBehaviour, IEntity
 		UI_Handler.Instance.HackModeOff(); // Change UI
 		myCamData.SetRenderer(0); //Disable the wallhack
 		hackModePostProcessing.SetActive(false); //Disable the on screen filter
+	}
+
+	private void UseEquipedItem()
+	{
+		currentlyEquiped.Use();
 	}
 }

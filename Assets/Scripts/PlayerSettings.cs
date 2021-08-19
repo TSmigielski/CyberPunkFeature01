@@ -12,8 +12,9 @@ public class PlayerSettings : MonoBehaviour
 			Destroy(gameObject);
 	}
 
-	[SerializeField] private float _mouseSensitivity;
-	[SerializeField] private float _gamepadSensitivity;
+	[SerializeField] float _mouseSensitivity;
+	[SerializeField] float _gamepadSensitivity;
+	[SerializeField] Color _crosshairColor;
 
 	public float MouseSensitivity
 	{
@@ -24,5 +25,10 @@ public class PlayerSettings : MonoBehaviour
 	{
 		get { return _gamepadSensitivity; }
 		private set { _gamepadSensitivity = value; }
+	}
+	public Color CrosshairColor
+	{
+		get { return _crosshairColor; }
+		private set { _crosshairColor = value; }
 	}
 }

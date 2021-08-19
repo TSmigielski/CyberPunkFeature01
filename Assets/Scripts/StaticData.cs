@@ -12,12 +12,24 @@ public class StaticData : MonoBehaviour
 			Destroy(gameObject);
 	}
 
+	[Header("Tags")]
+	[SerializeField] private string _destructableTag_Wall;
+	[Header("Layers")]
 	[SerializeField] private LayerMask _groundLayer;
+	[SerializeField] private LayerMask _playerLayer;
 	[SerializeField] private LayerMask _enemyLayer;
 
+	public string DestructableTag_Wall
+	{
+		get { return _destructableTag_Wall; }
+	}
 	public LayerMask GroundLayer
 	{
 		get { return _groundLayer; }
+	}
+	public LayerMask PlayerLayer
+	{
+		get { return _playerLayer; }
 	}
 	public LayerMask EnemyLayer
 	{

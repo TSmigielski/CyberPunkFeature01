@@ -44,9 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c1400440213104a8c065dae8e74dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destructableTag_Wall: Destructable_Wall
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -64,3 +68,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mouseSensitivity: 0.02
   _gamepadSensitivity: 200
+  _crosshairColor: {r: 0, g: 1, b: 1, a: 1}

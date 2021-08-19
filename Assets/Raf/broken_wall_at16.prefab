@@ -905,6 +905,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
       value: brokenwallbits
@@ -993,6 +1005,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
@@ -1083,6 +1107,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
       value: brokenwallbits (1)
@@ -1171,6 +1207,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
@@ -1261,6 +1309,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
       value: brokenwallbits (1)
@@ -1349,6 +1409,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
@@ -1439,6 +1511,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
       value: brokenwallbits
@@ -1527,6 +1611,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
@@ -1617,6 +1713,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
       value: brokenwallbits (1)
@@ -1705,6 +1813,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
@@ -1795,6 +1915,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
       value: brokenwallbits (2)
@@ -1883,6 +2015,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
@@ -1973,6 +2117,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
       value: brokenwallbits (2)
@@ -2061,6 +2217,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
@@ -2151,6 +2319,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
       value: brokenwallbits (1)
@@ -2239,6 +2419,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7074681897062545621, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -3386553121241536846, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: -966204126061902051, guid: 67142f172a2fd8343b940d444df53610, type: 3}
+      propertyPath: m_TagString
+      value: Destructable_Wall
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67142f172a2fd8343b940d444df53610, type: 3}
       propertyPath: m_Name
