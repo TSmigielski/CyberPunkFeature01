@@ -6,6 +6,6 @@ public class GunData : EquipmentData
     public float damage;
     public float roundsPerMinute;
     public int magazineSize;
-    public int maxAmmo;
+    public int reserveAmmo;
     public bool isAutomatic;
 }

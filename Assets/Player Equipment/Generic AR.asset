@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88a84d9d43541994bbffb8dcdc08b4fd, type: 3}
-  m_Name: Wall Melter 2000
+  m_Name: Generic AR
   m_EditorClassIdentifier: 
-  itemName: Wall Melter 2000
-  damage: 10
-  roundsPerMinute: 30
-  magazineSize: 1
-  reserveAmmo: 999
-  isAutomatic: 0
+  itemName: AR
+  damage: 60
+  roundsPerMinute: 900
+  magazineSize: 30
+  reserveAmmo: 990
+  isAutomatic: 1

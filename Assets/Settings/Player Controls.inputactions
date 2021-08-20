@@ -84,6 +84,38 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Select Item",
+                    "type": "Value",
+                    "id": "dc5d201f-e232-42f7-aba0-7acea45c4b89",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Select Item 1",
+                    "type": "Button",
+                    "id": "1cee139f-c4d4-481c-9c48-840e419fb8c1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Select Item 2",
+                    "type": "Button",
+                    "id": "79262333-53d6-4bc9-8d0e-f4701842a2ab",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Select Item 3",
+                    "type": "Button",
+                    "id": "db82c65c-1669-4db4-850e-dc3eefd5489d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -326,6 +358,61 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32d1c93e-aa65-4cc2-9d74-45a7835c0f5a",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB & M",
+                    "action": "Select Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24b0fb21-7c50-4540-9484-21cbe276f550",
+                    "path": "<Gamepad>/dpad/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Select Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f76c562d-9295-46f2-b420-173cc6a47398",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB & M",
+                    "action": "Select Item 1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ce78c7e4-fe93-4c0f-a8fa-b10aa2e0df45",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB & M",
+                    "action": "Select Item 2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8afabbf7-c2d2-4b49-8ef5-d2af2f2bcda8",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB & M",
+                    "action": "Select Item 3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

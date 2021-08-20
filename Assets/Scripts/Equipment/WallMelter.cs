@@ -9,6 +9,9 @@ public class WallMelter : Gun
 
 	public override void Use()
 	{
+		if (!IsReady)
+			return;
+
 		RaycastHit hit;
 		if (Physics.Raycast(mainCam.position, mainCam.transform.forward, out hit))
 		{
@@ -20,26 +23,28 @@ public class WallMelter : Gun
 
 	private void CustomShoot(Vector3 target)
 	{
+		if (Magazine <= 0)
+			return;
+
+		Magazine--;
+		ShootPoint.Play();
+		Animator.SetTrigger("Fired");
+		UI_Handler.Instance.UpdateAmmo(Magazine, Reserves);
+
+		var projectile = Instantiate(projectilePrefab, ShootPoint.transform);
+		var projectileScript = projectile.GetComponent<WallMelter_ProjectileBehaviour>();
+		projectileScript.Initialize(meltRadius);
+
 		if (target != Vector3.zero)
 		{
-			var projectile = Instantiate(projectilePrefab, ShootPoint);
-			var projectileScript = projectile.GetComponent<WallMelter_ProjectileBehaviour>();
-			projectileScript.Initialize(meltRadius);
 			var dir = target - projectile.transform.position;
 			projectileScript.RB.AddForce(dir.normalized * projectileSpeed, ForceMode.Impulse);
-			projectileScript.BulletDrop = bulletDropForce;
-			projectile.transform.SetParent(null);
-			Destroy(projectile, 10);
 		}
 		else
-		{
-			var projectile = Instantiate(projectilePrefab, ShootPoint);
-			var projectileScript = projectile.GetComponent<WallMelter_ProjectileBehaviour>();
-			projectileScript.Initialize(meltRadius);
 			projectileScript.RB.AddRelativeForce(projectileSpeed, 0, 0, ForceMode.Impulse);
-			projectileScript.BulletDrop = bulletDropForce;
-			projectile.transform.SetParent(null);
-			Destroy(projectile, 10);
-		}
+
+		projectileScript.BulletDrop = bulletDropForce;
+		projectile.transform.SetParent(null);
+		Destroy(projectile, 10);
 	}
 }

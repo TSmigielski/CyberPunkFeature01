@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -14,7 +15,7 @@ public class PlayerController : MonoBehaviour, IEntity
 	//Player Controls
 	PlayerControls controls;
 
-	//Look Around variables
+	//Player Input
 	Vector2 lookVector;
 	float headRotation;
 
@@ -23,7 +24,8 @@ public class PlayerController : MonoBehaviour, IEntity
 
 	//Equipment
 	Equipment[] myEquipment;
-	Equipment currentlyEquiped;
+	(int index, Equipment item) currentlyEquiped;
+	float scroll;
 
 	[Header("Objects/Components")]
 	[SerializeField] Transform head;
@@ -45,37 +47,43 @@ public class PlayerController : MonoBehaviour, IEntity
 		controls = new PlayerControls();				   //Instantiate the controls
 		myCamData = mainCamera.GetComponent<UniversalAdditionalCameraData>(); //Reference extra cam data to the field
 		InitializeControlScheme();                         //Assign default values to the control scheme
-		FindEquipment();								   //Find all pieces of equipment on the player
+		FindEquipment();                                   //Find all pieces of equipment on the player
 	}
 
 	private void Start()
 	{
 		Cursor.lockState = CursorLockMode.Locked; //Lock the cursor and make it invisible
-
-		//todo Debug stuff
-		currentlyEquiped = myEquipment[0];
+		EquipItem(0);
 	}
 
-	private void OnEnable()
+	private void OnEnable() //Subscribe to all input events and handlet them
 	{
-		controls.Enable();                                                              //Enable the controls
-		controls.Player.Sprint.started += _ => { ControlScheme.IsSprinting = true; };   //Subscribe to the sprint start event, and set the value
-		controls.Player.Sprint.canceled += _ => { ControlScheme.IsSprinting = false; }; //Subscribe to the sprint stop event, and set the value
-		controls.Player.Jump.performed += _ => movementController.PerformJump();        //Subscribe to the jump event and handle it
-		controls.Player.HackMode.started += _ => HackModeOn();							//Subscribe to the Hack Mode on event
-		controls.Player.HackMode.canceled += _ => HackModeOff();                        //Subscribe to the Hack Mode off event
-		controls.Player.Shoot.performed += _ => UseEquipedItem();						//Subscribe to the UseEquipedItem event and handle it
+		controls.Enable();
+		controls.Player.Sprint.started += _ => { ControlScheme.IsSprinting = true; };
+		controls.Player.Sprint.canceled += _ => { ControlScheme.IsSprinting = false; };
+		controls.Player.Jump.performed += _ => movementController.PerformJump();
+		controls.Player.HackMode.started += _ => HackModeOn();
+		controls.Player.HackMode.canceled += _ => HackModeOff();
+		controls.Player.Shoot.performed += _ => UseEquipedItem();
+		controls.Player.Reload.performed += _ => ReloadWeapon();
+		controls.Player.SelectItem1.performed += _ => EquipItem(1);
+		controls.Player.SelectItem2.performed += _ => EquipItem(2);
+		controls.Player.SelectItem3.performed += _ => EquipItem(3);
 	}
 
-	private void OnDisable()
+	private void OnDisable() //Unsubscribe from all input events
 	{
-		controls.Player.Sprint.started -= _ => { ControlScheme.IsSprinting = true; };   //Unsubscribe from the sprint start event
-		controls.Player.Sprint.canceled -= _ => { ControlScheme.IsSprinting = false; }; //Unsubscribe from the sprint stop event
-		controls.Player.Jump.performed -= _ => movementController.PerformJump();        //Unsubscribe from the jump event
-		controls.Player.HackMode.performed -= _ => HackModeOn();						//Unsubscribe from the Hack Mode on event
-		controls.Player.HackMode.performed -= _ => HackModeOff();                       //Unsubscribe from the Hack Mode off event
-		controls.Player.Shoot.performed -= _ => UseEquipedItem();                       //Unsubscribe from the UseEquipedItem event and handle it
-		controls.Disable();                                                             //Disable the controls
+		controls.Player.Sprint.started -= _ => { ControlScheme.IsSprinting = true; };
+		controls.Player.Sprint.canceled -= _ => { ControlScheme.IsSprinting = false; };
+		controls.Player.Jump.performed -= _ => movementController.PerformJump();
+		controls.Player.HackMode.performed -= _ => HackModeOn();
+		controls.Player.HackMode.performed -= _ => HackModeOff();
+		controls.Player.Shoot.performed -= _ => UseEquipedItem();
+		controls.Player.Reload.performed -= _ => ReloadWeapon();
+		controls.Player.SelectItem1.performed -= _ => EquipItem(1);
+		controls.Player.SelectItem2.performed -= _ => EquipItem(2);
+		controls.Player.SelectItem3.performed -= _ => EquipItem(3);
+		controls.Disable();
 	}
 
 	private void Update()
@@ -95,6 +103,9 @@ public class PlayerController : MonoBehaviour, IEntity
 	private void FindEquipment()
 	{
 		myEquipment = GetComponentsInChildren<Equipment>();
+		UI_Handler.Instance.InitializeEquipment(myEquipment);
+		foreach (var eq in myEquipment)
+			eq.gameObject.SetActive(false);
 	}
 
 	private void HandlePlayerInput()
@@ -110,6 +121,30 @@ public class PlayerController : MonoBehaviour, IEntity
 			lookVector = pad * PlayerSettings.Instance.GamepadSensitivity * Time.deltaTime; //Pass the input to the lookVector field multiplied by gamepad sensitivity and deltaTime
 		else																				//This is because the mouse input is a delta, and gamepad's not
 			lookVector = Vector2.zero; //Pass 0 to stop any rotation if no input is present
+
+		//Equipment
+		var newScroll = controls.Player.SelectItem.ReadValue<float>();
+		if (newScroll != 0 && scroll != 0)
+			return;
+
+		scroll = newScroll;
+
+		if (scroll > 0)
+		{
+			if (currentlyEquiped.index == myEquipment.Length)
+				EquipItem(0);
+			//else if (currentlyEquiped.index == 0)
+			//	EquipItem(1);
+			else
+				EquipItem(currentlyEquiped.index + 1);
+		}
+		else if (scroll < 0)
+		{
+			if (currentlyEquiped.index == 0)
+				EquipItem(myEquipment.Length);
+			else
+				EquipItem(currentlyEquiped.index - 1);
+		}
 	}
 	
 	private void UpdateCharacterLooking()
@@ -137,8 +172,39 @@ public class PlayerController : MonoBehaviour, IEntity
 		hackModePostProcessing.SetActive(false); //Disable the on screen filter
 	}
 
+	private void EquipItem(int index)
+	{
+		if (currentlyEquiped.index == index)
+			index = 0;
+
+		foreach (var eq in myEquipment)
+			eq.gameObject.SetActive(false);
+
+		if (index == 0)
+			currentlyEquiped = (0, null);
+		else
+		{
+			currentlyEquiped = (index, myEquipment[index - 1]);
+			currentlyEquiped.item.gameObject.SetActive(true);
+		}
+
+		UI_Handler.Instance.SelectEquipment(index);
+	}
+
 	private void UseEquipedItem()
 	{
-		currentlyEquiped.Use();
+		if (currentlyEquiped.index == 0)
+			return;
+
+		currentlyEquiped.item.Use();
+	}
+
+	private void ReloadWeapon()
+	{
+		if (currentlyEquiped.item is Gun)
+		{
+			var currentGun= currentlyEquiped.item as Gun;
+			currentGun.Reload();
+		}
 	}
 }
