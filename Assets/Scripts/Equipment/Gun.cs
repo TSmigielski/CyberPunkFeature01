@@ -55,7 +55,8 @@ public class Gun : Equipment
 
 	public virtual void Reload()
 	{
-		Animator.SetTrigger("Reload"); //Animation handles readiness
+		if (Magazine < gunData.magazineSize)
+			Animator.SetTrigger("Reload"); //Animation handles readiness
 	}
 
 	protected virtual void MagazineIn() //Animation calls this method
