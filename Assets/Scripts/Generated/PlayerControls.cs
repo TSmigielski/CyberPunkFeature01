@@ -97,6 +97,38 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select Item"",
+                    ""type"": ""Value"",
+                    ""id"": ""dc5d201f-e232-42f7-aba0-7acea45c4b89"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select Item 1"",
+                    ""type"": ""Button"",
+                    ""id"": ""1cee139f-c4d4-481c-9c48-840e419fb8c1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select Item 2"",
+                    ""type"": ""Button"",
+                    ""id"": ""79262333-53d6-4bc9-8d0e-f4701842a2ab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select Item 3"",
+                    ""type"": ""Button"",
+                    ""id"": ""db82c65c-1669-4db4-850e-dc3eefd5489d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -341,6 +373,61 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32d1c93e-aa65-4cc2-9d74-45a7835c0f5a"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KB & M"",
+                    ""action"": ""Select Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24b0fb21-7c50-4540-9484-21cbe276f550"",
+                    ""path"": ""<Gamepad>/dpad/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f76c562d-9295-46f2-b420-173cc6a47398"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KB & M"",
+                    ""action"": ""Select Item 1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce78c7e4-fe93-4c0f-a8fa-b10aa2e0df45"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KB & M"",
+                    ""action"": ""Select Item 2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8afabbf7-c2d2-4b49-8ef5-d2af2f2bcda8"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KB & M"",
+                    ""action"": ""Select Item 3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -387,6 +474,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_SelectItem = m_Player.FindAction("Select Item", throwIfNotFound: true);
+        m_Player_SelectItem1 = m_Player.FindAction("Select Item 1", throwIfNotFound: true);
+        m_Player_SelectItem2 = m_Player.FindAction("Select Item 2", throwIfNotFound: true);
+        m_Player_SelectItem3 = m_Player.FindAction("Select Item 3", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -446,6 +537,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_SelectItem;
+    private readonly InputAction m_Player_SelectItem1;
+    private readonly InputAction m_Player_SelectItem2;
+    private readonly InputAction m_Player_SelectItem3;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -460,6 +555,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @SelectItem => m_Wrapper.m_Player_SelectItem;
+        public InputAction @SelectItem1 => m_Wrapper.m_Player_SelectItem1;
+        public InputAction @SelectItem2 => m_Wrapper.m_Player_SelectItem2;
+        public InputAction @SelectItem3 => m_Wrapper.m_Player_SelectItem3;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -499,6 +598,18 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @SelectItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem;
+                @SelectItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem;
+                @SelectItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem;
+                @SelectItem1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem1;
+                @SelectItem1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem1;
+                @SelectItem1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem1;
+                @SelectItem2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem2;
+                @SelectItem2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem2;
+                @SelectItem2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem2;
+                @SelectItem3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem3;
+                @SelectItem3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem3;
+                @SelectItem3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem3;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -533,6 +644,18 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @SelectItem.started += instance.OnSelectItem;
+                @SelectItem.performed += instance.OnSelectItem;
+                @SelectItem.canceled += instance.OnSelectItem;
+                @SelectItem1.started += instance.OnSelectItem1;
+                @SelectItem1.performed += instance.OnSelectItem1;
+                @SelectItem1.canceled += instance.OnSelectItem1;
+                @SelectItem2.started += instance.OnSelectItem2;
+                @SelectItem2.performed += instance.OnSelectItem2;
+                @SelectItem2.canceled += instance.OnSelectItem2;
+                @SelectItem3.started += instance.OnSelectItem3;
+                @SelectItem3.performed += instance.OnSelectItem3;
+                @SelectItem3.canceled += instance.OnSelectItem3;
             }
         }
     }
@@ -567,5 +690,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnSelectItem(InputAction.CallbackContext context);
+        void OnSelectItem1(InputAction.CallbackContext context);
+        void OnSelectItem2(InputAction.CallbackContext context);
+        void OnSelectItem3(InputAction.CallbackContext context);
     }
 }
