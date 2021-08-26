@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Equipment : MonoBehaviour
@@ -18,11 +19,32 @@ public class Equipment : MonoBehaviour
 	}
 
 	public bool IsReady { get; protected set; } = true;
+	public bool IsUsing { get; set; } = false;
 
-	public virtual void Use()
+	protected bool coIsRunning = false;
+
+	private void Update()
 	{
-		if (!IsReady)
-			return;
+		if (IsUsing && !coIsRunning)
+		{
+			StartCoroutine(Use(0f));
+		}
+	}
+
+	public virtual IEnumerator Use(float autoPause = 0f)
+	{
+		coIsRunning = true;
+		while (IsUsing)
+		{
+			if (!IsReady)
+			{
+				coIsRunning = false;
+				yield break;
+			}
+
+			yield return new WaitForSeconds(autoPause);
+		}
+		coIsRunning = false;
 	}
 
 	public virtual void MakeReady()

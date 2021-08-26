@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -12,6 +13,8 @@ public class Gun : Equipment
 	public int Magazine { get; protected set; }
 	public int Reserves { get; protected set; }
 
+	protected float rpmInverted;
+
 	private void Awake()
 	{
 		gunData = EQData as GunData;
@@ -21,6 +24,7 @@ public class Gun : Equipment
 
 		Magazine = gunData.magazineSize;
 		Reserves = gunData.reserveAmmo;
+		rpmInverted = 60f / gunData.roundsPerMinute;
 	}
 
 	private void OnEnable()
@@ -34,12 +38,22 @@ public class Gun : Equipment
 		private set { _shootPoint = value; }
 	}
 
-	public override void Use()
+	public override IEnumerator Use(float _)
 	{
-		if (!IsReady)
-			return;
+		coIsRunning = true;
+		while (IsUsing)
+		{
+			if (!IsReady)
+			{
+				coIsRunning = false;
+				yield break;
+			}
 
-		Shoot();
+			Shoot();
+
+			yield return new WaitForSeconds(rpmInverted);
+		}
+		coIsRunning = false;
 	}
 
 	private void Shoot()
@@ -51,6 +65,8 @@ public class Gun : Equipment
 			Animator.SetTrigger("Fired");
 			UI_Handler.Instance.UpdateAmmo(Magazine, Reserves);
 		}
+		else
+			Reload();
 	}
 
 	public virtual void Reload()

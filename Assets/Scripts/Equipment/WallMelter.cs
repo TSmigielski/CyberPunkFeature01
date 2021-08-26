@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class WallMelter : Gun
@@ -7,10 +8,10 @@ public class WallMelter : Gun
 	[SerializeField] float bulletDropForce;
 	[SerializeField] float meltRadius;
 
-	public override void Use()
+	public override IEnumerator Use(float _)
 	{
-		if (!IsReady)
-			return;
+		if (!IsUsing || !IsReady)
+			yield break;
 
 		RaycastHit hit;
 		if (Physics.Raycast(mainCam.position, mainCam.transform.forward, out hit))
@@ -24,7 +25,10 @@ public class WallMelter : Gun
 	private void CustomShoot(Vector3 target)
 	{
 		if (Magazine <= 0)
+		{
+			Reload();
 			return;
+		}
 
 		Magazine--;
 		ShootPoint.Play();

@@ -59,12 +59,13 @@ public class PlayerController : MonoBehaviour, IEntity
 	private void OnEnable() //Subscribe to all input events and handlet them
 	{
 		controls.Enable();
-		controls.Player.Sprint.started += _ => { ControlScheme.IsSprinting = true; };
-		controls.Player.Sprint.canceled += _ => { ControlScheme.IsSprinting = false; };
+		controls.Player.Sprint.started += _ => ControlScheme.IsSprinting = true;
+		controls.Player.Sprint.canceled += _ => ControlScheme.IsSprinting = false;
 		controls.Player.Jump.performed += _ => movementController.PerformJump();
 		controls.Player.HackMode.started += _ => HackModeOn();
 		controls.Player.HackMode.canceled += _ => HackModeOff();
-		controls.Player.Shoot.performed += _ => UseEquipedItem();
+		controls.Player.Shoot.started += _ => { if (currentlyEquiped.index != 0) currentlyEquiped.item.IsUsing = true; };
+		controls.Player.Shoot.canceled += _ => { if (currentlyEquiped.index != 0) currentlyEquiped.item.IsUsing = false; };
 		controls.Player.Reload.performed += _ => ReloadWeapon();
 		controls.Player.SelectItem1.performed += _ => EquipItem(1);
 		controls.Player.SelectItem2.performed += _ => EquipItem(2);
@@ -78,7 +79,8 @@ public class PlayerController : MonoBehaviour, IEntity
 		controls.Player.Jump.performed -= _ => movementController.PerformJump();
 		controls.Player.HackMode.performed -= _ => HackModeOn();
 		controls.Player.HackMode.performed -= _ => HackModeOff();
-		controls.Player.Shoot.performed -= _ => UseEquipedItem();
+		controls.Player.Shoot.started -= _ => { if (currentlyEquiped.index != 0) currentlyEquiped.item.IsUsing = true; };
+		controls.Player.Shoot.canceled -= _ => { if (currentlyEquiped.index != 0) currentlyEquiped.item.IsUsing = false; };
 		controls.Player.Reload.performed -= _ => ReloadWeapon();
 		controls.Player.SelectItem1.performed -= _ => EquipItem(1);
 		controls.Player.SelectItem2.performed -= _ => EquipItem(2);
@@ -133,8 +135,6 @@ public class PlayerController : MonoBehaviour, IEntity
 		{
 			if (currentlyEquiped.index == myEquipment.Length)
 				EquipItem(0);
-			//else if (currentlyEquiped.index == 0)
-			//	EquipItem(1);
 			else
 				EquipItem(currentlyEquiped.index + 1);
 		}
@@ -189,14 +189,6 @@ public class PlayerController : MonoBehaviour, IEntity
 		}
 
 		UI_Handler.Instance.SelectEquipment(index);
-	}
-
-	private void UseEquipedItem()
-	{
-		if (currentlyEquiped.index == 0)
-			return;
-
-		currentlyEquiped.item.Use();
 	}
 
 	private void ReloadWeapon()
